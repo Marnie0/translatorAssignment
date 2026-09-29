@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Translator</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main
+      class="main container-fluid bg-dark min-vh-100 d-flex justify-content-center align-items-center"
+    >
+      <section
+        class="translatorSection bg-light d-flex flex-column justify-content-center align-items-center p-5 rounded"
+      >
+        <h1 class="pb-2">Welcome to the Translator</h1>
+        <form class="form">
+          <section class="textAreaSection d-flex flex-row pb-2 gap-4"> 
+            <textarea
+              class="form-control toTranslate fs-5"
+              rows="12"
+              placeholder="Enter text to translate"
+            ></textarea>
+            <textarea
+              class="form-control translated text-light fs-5 bg-secondary"
+              rows="12"
+              placeholder="Translated text will appear here"
+              disabled
+            ></textarea>
+          </section>
+          <section class="selectSection d-flex justify-content-center gap-2 p-3">
+            <select class="form-select fromLanguage" aria-label="Default select example">
+              <option value="" selected disabled>Choose Language</option>
+            </select>
+            <select class="form-select toLanguage" aria-label="Default select example">
+              <option value="" selected disabled>Choose Language</option>
+            </select>
+          </section>
+          <section class="btnSection d-flex justify-content-center gap-2 p-3">
+            <button class="translateBtn btn btn-primary rounded" type="submit">Translate</button>
+          </section>
+        </form>
+      </section>
+    </main>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
