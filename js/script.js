@@ -14,6 +14,9 @@ const fromLang = document.querySelector(
 const toLang = document.querySelector(
   ".main .translatorSection .form .selectSection .toLanguage",
 );
+const translateBtn = document.querySelector(
+  ".main .translatorSection .form .btnSection .translateBtn",
+);
 let selectedFromLanguage = "";
 let selectedToLanguage = "";
 
@@ -133,6 +136,7 @@ function getSelectedLanguage() {
 
 function translate() {
   translated.value = "Translating...";
+  translateBtn.disabled = true;
   fetch(
     `https://api.mymemory.translated.net/get?q=${toTranslate.value}&langpair=${selectedFromLanguage}|${selectedToLanguage}`,
   )
@@ -142,6 +146,8 @@ function translate() {
     }).catch((error) => {
       translated.value = "Error translating text. Please try again.";
       console.log("Error translating text:", error);
+    }).finally(() => {
+      translateBtn.disabled = false;
     });
 }
 
