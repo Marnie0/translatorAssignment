@@ -1,7 +1,7 @@
+const form = document.querySelector(".main .translatorSection .form");
 const formSelects = document.querySelectorAll(
   ".main .translatorSection .form .selectSection .form-select",
 );
-const form = document.querySelector(".main .translatorSection .form");
 const toTranslate = document.querySelector(
   ".main .translatorSection .form .textAreaSection .toTranslate",
 );
