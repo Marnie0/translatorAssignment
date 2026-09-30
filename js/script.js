@@ -1,21 +1,24 @@
-const form = document.querySelector(".main .translatorSection .form");
+const form = document.querySelector(".form");
 const formSelects = document.querySelectorAll(
-  ".main .translatorSection .form .selectSection .form-select",
+  ".form-select",
 );
 const toTranslate = document.querySelector(
-  ".main .translatorSection .form .textAreaSection .toTranslate",
+  ".toTranslate",
 );
 const translated = document.querySelector(
-  ".main .translatorSection .form .textAreaSection .translated",
+  ".translated",
 );
 const fromLang = document.querySelector(
-  ".main .translatorSection .form .selectSection .fromLanguage",
+  ".fromLanguage",
 );
 const toLang = document.querySelector(
-  ".main .translatorSection .form .selectSection .toLanguage",
+  ".toLanguage",
 );
 const translateBtn = document.querySelector(
-  ".main .translatorSection .form .btnSection .translateBtn",
+  ".translateBtn",
+);
+const swapBtn = document.querySelector(
+  ".swapBtn",
 );
 let selectedFromLanguage = "";
 let selectedToLanguage = "";
@@ -158,3 +161,7 @@ form.addEventListener("submit", (event) => {
   translate();
   }
 });
+
+swapBtn.addEventListener("click", () => {
+  [fromLang.value, toLang.value] = [toLang.value, fromLang.value];
+})

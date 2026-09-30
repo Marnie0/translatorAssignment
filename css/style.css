@@ -1,0 +1,11 @@
+.toTranslate, .translated{
+    height:20rem;
+}
+
+
+@media (max-width: 900px) {
+  .toTranslate,
+  .translated {
+    height: 13rem;
+  }
+}
