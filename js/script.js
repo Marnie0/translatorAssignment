@@ -2,28 +2,26 @@ const form = document.querySelector(".form");
 const formSelects = document.querySelectorAll(
   ".form-select",
 );
-const toTranslate = document.querySelector(
+const sourceText = document.querySelector(
   ".toTranslate",
 );
-const translated = document.querySelector(
+const translatedText = document.querySelector(
   ".translated",
 );
-const fromLang = document.querySelector(
+const fromLanguageSelect = document.querySelector(
   ".fromLanguage",
 );
-const toLang = document.querySelector(
+const toLanguageSelect = document.querySelector(
   ".toLanguage",
 );
-const translateBtn = document.querySelector(
+const translateButton = document.querySelector(
   ".translateBtn",
 );
-const swapBtn = document.querySelector(
+const swapButton = document.querySelector(
   ".swapBtn",
 );
-let selectedFromLanguage = "";
-let selectedToLanguage = "";
 
-const countries = {
+const languages = {
   "am-ET": "Amharic",
   "ar-SA": "Arabic",
   "be-BY": "Bielarus",
@@ -124,7 +122,7 @@ const countries = {
 };
 
 formSelects.forEach((select) => {
-  for (const [code, name] of Object.entries(countries)) {
+  for (const [code, name] of Object.entries(languages)) {
     const option = document.createElement("option");
     option.value = code;
     option.textContent = name;
@@ -132,36 +130,35 @@ formSelects.forEach((select) => {
   }
 });
 
-function getSelectedLanguage() {
-  selectedFromLanguage = fromLang.value.slice(0,2);
-  selectedToLanguage = toLang.value.slice(0,2);
-}
 
-function translate() {
-  translated.value = "Translating...";
-  translateBtn.disabled = true;
+function translate(fromLanguage, toLanguage) {
+  translatedText.value = "Translating...";
+  translateButton.disabled = true;
+
+  const text = sourceText.value.trim();
   fetch(
-    `https://api.mymemory.translated.net/get?q=${toTranslate.value}&langpair=${selectedFromLanguage}|${selectedToLanguage}`,
+    `https://api.mymemory.translated.net/get?q=${text}&langpair=${fromLanguage}|${toLanguage}`,
   )
     .then((response) => response.json())
     .then((data) => {
-      translated.value = data.responseData.translatedText;
+      translatedText.value = data.responseData.translatedText;
     }).catch((error) => {
-      translated.value = "Error translating text. Please try again.";
+      translatedText.value = "Error translating text. Please try again.";
       console.log("Error translating text:", error);
     }).finally(() => {
-      translateBtn.disabled = false;
+      translateButton.disabled = false;
     });
 }
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  if(fromLang.value && toLang.value && toTranslate.value.trim() !== "") {
-  getSelectedLanguage();
-  translate();
+  if(fromLanguageSelect.value && toLanguageSelect.value && sourceText.value.trim() !== "") {
+    const fromLanguage = fromLanguageSelect.value.slice(0, 2);
+    const toLanguage = toLanguageSelect.value.slice(0, 2);
+    translate(fromLanguage, toLanguage);
   }
 });
 
-swapBtn.addEventListener("click", () => {
-  [fromLang.value, toLang.value] = [toLang.value, fromLang.value];
+swapButton.addEventListener("click", () => {
+  [fromLanguageSelect.value, toLanguageSelect.value] = [toLanguageSelect.value, fromLanguageSelect.value];
 })
